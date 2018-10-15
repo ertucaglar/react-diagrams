@@ -30,6 +30,7 @@ export interface DiagramProps extends BaseWidgetProps {
 	actionStartedFiring?: (action: BaseAction) => boolean;
 	actionStillFiring?: (action: BaseAction) => void;
 	actionStoppedFiring?: (action: BaseAction) => void;
+	itemSelected?: (model: BaseModel) => void;
 
 	deleteKeys?: number[];
 }
@@ -392,6 +393,10 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 
 			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction(!this.state.wasMoved);
+			if (element.model.selected) {
+				this.props.itemSelected(element.model);
+			}
+
 		} else {
 			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction();
