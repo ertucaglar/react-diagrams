@@ -18,11 +18,13 @@ export default () => {
 
 	//3-A) create a default node
 	var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
-	let port1 = node1.addOutPort("Out");
+	node1.portAlignment = "right";
+	let port1 = node1.addOutPort("");
 	node1.setPosition(100, 100);
 
 	//3-B) create another default node
 	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
+	node2.portAlignment = "left";
 	let port2 = node2.addInPort("In");
 	node2.setPosition(400, 100);
 
@@ -36,7 +38,7 @@ export default () => {
 	engine.setDiagramModel(model);
 
 	//6) render the diagram!
-	return <DiagramWidget className="srd-demo-canvas" diagramEngine={engine} itemSelected={(e) => {
+	return <DiagramWidget className="srd-demo-canvas" allowCanvasTranslation={false} allowCanvasZoom={false} diagramEngine={engine} itemSelected={(e) => {
 		console.log(e);
 	}} />;
 };

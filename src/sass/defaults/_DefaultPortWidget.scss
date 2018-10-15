@@ -3,6 +3,7 @@
 
   display: flex;
   margin-top: 1px;
+	height: 22px;
 
   > * {
     align-self: center;
@@ -12,13 +13,23 @@
     padding: 0 5px;
   }
 
+	.name {
+		display: none;
+	}
+
 
   &--out{
     justify-content: flex-end;
+	  height: 22px;
+
+	  .name {
+		  display: none;
+	  }
 
     #{$p}__name {
       justify-content: flex-end;
       text-align: right;
+		display: none;
     }
   }
 }

@@ -28,10 +28,10 @@ export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps, DefaultNodeS
 	render() {
 		return (
 			<div {...this.getProps()} style={{ background: this.props.node.color }}>
-				<div className={this.bem("__title")}>
+				<div className={this.bem("__title") + (this.props.node.portAlignment === "right" ? "left" : "right")}>
 					<div className={this.bem("__name")}>{this.props.node.name}</div>
 				</div>
-				<div className={this.bem("__ports")}>
+				<div className={this.bem("__ports") + this.props.node.portAlignment}>
 					<div className={this.bem("__in")}>
 						{_.map(this.props.node.getInPorts(), this.generatePort.bind(this))}
 					</div>
