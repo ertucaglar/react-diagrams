@@ -6,8 +6,9 @@ import { DiagramEngine } from "../DiagramEngine";
 export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
 	x: number;
 	y: number;
+	title?: string;
 
-	constructor(link: LinkModel, points: { x: number; y: number }) {
+	constructor(link: LinkModel, points: { x: number; y: number, title?: string }) {
 		super();
 		this.x = points.x;
 		this.y = points.y;
@@ -33,12 +34,14 @@ export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
 		super.deSerialize(ob, engine);
 		this.x = ob.x;
 		this.y = ob.y;
+		this.title = ob.title;
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
 			x: this.x,
-			y: this.y
+			y: this.y,
+			title: this.title
 		});
 	}
 
@@ -50,9 +53,10 @@ export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
 		super.remove();
 	}
 
-	updateLocation(points: { x: number; y: number }) {
+	updateLocation(points: { x: number; y: number, title?: string }) {
 		this.x = points.x;
 		this.y = points.y;
+		this.title = points.title;
 	}
 
 	getX(): number {
@@ -61,6 +65,10 @@ export class PointModel extends BaseModel<LinkModel, BaseModelListener> {
 
 	getY(): number {
 		return this.y;
+	}
+
+	getTitle(): string {
+		return this.title;
 	}
 
 	isLocked() {

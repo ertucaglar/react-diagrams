@@ -85,11 +85,13 @@ export class DefaultLinkWidget extends BaseWidget<DefaultLinkProps, DefaultLinkS
 	};
 
 	generatePoint(pointIndex: number): JSX.Element {
+		let point = this.props.link.points[pointIndex];
 		let x = this.props.link.points[pointIndex].x;
 		let y = this.props.link.points[pointIndex].y;
 
 		return (
 			<g key={"point-" + this.props.link.points[pointIndex].id}>
+				{point.title && <text x={x - 10} y={y - 10} className={this.bem("--point-title")}>{point.title}</text>}
 				<circle
 					cx={x}
 					cy={y}
