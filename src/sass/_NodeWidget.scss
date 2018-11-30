@@ -12,3 +12,46 @@
     }
   }
 }
+
+.entity-node {
+	background-color: #86b200;
+	border: solid 3px black;
+	border-radius: 5px;
+
+	h3 {
+		font-size: 10pt;
+		margin: 0;
+		padding: 3px;
+		background-color: rgba(255,255,255,0.3);
+		text-align: center;
+	}
+
+	.srd-default-port {
+		.name {
+			display: block;
+			font-size: 9pt;
+			color: white;
+		}
+	}
+
+	.enetity-node-actions {
+		.add-new-button {
+			width: 100%;
+			font-size: 8pt;
+			font-weight: bold;
+			background-color: rgba(255,255,255,0.3);
+			border: 0;
+			padding: 3px 0;
+			cursor: pointer;
+			display: block;
+			text-align: center;
+		}
+		.add-new-button:hover {
+			background-color: rgba(255,255,255,0.5);
+			cursor: pointer;
+		}
+		.add-new-button:focus {
+			border: 0;
+		}
+	}
+}

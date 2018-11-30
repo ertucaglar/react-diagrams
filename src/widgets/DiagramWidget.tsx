@@ -391,7 +391,6 @@ export class DiagramWidget extends BaseWidget<DiagramProps, DiagramState> {
 				}
 			});
 
-			diagramEngine.clearRepaintEntities();
 			this.stopFiringAction(!this.state.wasMoved);
 			if (element.model.selected) {
 				this.props.itemSelected(element.model);
