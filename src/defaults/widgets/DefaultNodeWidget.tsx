@@ -4,7 +4,6 @@ import { DefaultNodeModel } from "../models/DefaultNodeModel";
 import { DefaultPortLabel } from "./DefaultPortLabelWidget";
 import { DiagramEngine } from "../../DiagramEngine";
 import { BaseWidget, BaseWidgetProps } from "../../widgets/BaseWidget";
-import { DefaultPortModel } from "storm-react-diagrams";
 
 export interface DefaultNodeProps extends BaseWidgetProps {
 	node: DefaultNodeModel;
@@ -27,12 +26,20 @@ export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps, DefaultNodeS
 	}
 
 	generatePort(port) {
-		return <DefaultPortLabel model={port} key={port.id} />;
+		return <DefaultPortLabel removeCallback={this.reRender} model={port} key={port.id} />;
 	}
 
 	addNewPort = (node: DefaultNodeModel) => {
 		const {changed} = this.state;
-		node.addInPort(`Giriş ${Object.keys(this.props.node.ports).length}`);
+		const extras = {
+			isNew: true
+		};
+		node.addInPort(`Giriş ${Object.keys(this.props.node.ports).length}`, extras);
+		this.setState({changed: !changed})
+	};
+
+	reRender = () => {
+		const {changed} = this.state;
 		this.setState({changed: !changed})
 	};
 

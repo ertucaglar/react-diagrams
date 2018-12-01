@@ -21,12 +21,12 @@ export class DefaultNodeModel extends NodeModel {
 		this.showAddNewButton = showAddNewButton;
 	}
 
-	addInPort(label: string): DefaultPortModel {
-		return this.addPort(new DefaultPortModel(true, Toolkit.UID(), label));
+	addInPort(label: string, extras: any = {}): DefaultPortModel {
+		return this.addPort(new DefaultPortModel(true, Toolkit.UID(), label, null, extras));
 	}
 
-	addOutPort(label: string): DefaultPortModel {
-		return this.addPort(new DefaultPortModel(false, Toolkit.UID(), label));
+	addOutPort(label: string, extras: any = {}): DefaultPortModel {
+		return this.addPort(new DefaultPortModel(false, Toolkit.UID(), label, null, extras));
 	}
 
 	deSerialize(object, engine: DiagramEngine) {

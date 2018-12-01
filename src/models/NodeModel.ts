@@ -120,9 +120,12 @@ export class NodeModel extends BaseModel<DiagramModel, BaseModelListener> {
 		}
 	}
 
-	addPort<T extends PortModel>(port: T): T {
+	addPort<T extends PortModel>(port: T, callback?: () => any): T {
 		port.setParent(this);
 		this.ports[port.name] = port;
+		if (callback) {
+			callback();
+		}
 		return port;
 	}
 
