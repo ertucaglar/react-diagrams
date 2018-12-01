@@ -4,7 +4,7 @@ import {
 	DefaultNodeModel,
 	LinkModel,
 	DiagramWidget,
-	DefaultLinkModel, BaseModel, PointModel, LabelModel
+	DefaultLinkModel, BaseModel, PointModel, LabelModel, DefaultPortModel
 } from "storm-react-diagrams";
 import * as React from "react";
 
@@ -31,12 +31,21 @@ export default () => {
 
 	//4) add the models to the root graph
 	model.addAll(node1, node2, link1);
-
 	//5) load model into engine
+	model.addListener({
+		nodesUpdated: () => {
+			debugger
+		},
+		linksUpdated: (e) => {
+			if (e.link && e.link.targetPort && (e.link.targetPort as DefaultPortModel).extras && (e.link.targetPort as DefaultPortModel).extras.isNew) {
+			engine.zoomToFit();
+			}
+		},
+	});
 	engine.setDiagramModel(model);
 
 	//6) render the diagram!
-	return <DiagramWidget className="srd-demo-canvas" diagramEngine={engine} itemSelected={(e) => {
+	return <DiagramWidget allowCanvasZoom={false} className="srd-demo-canvas" diagramEngine={engine} itemSelected={(e) => {
 		console.log(e);
 	}} />;
 };

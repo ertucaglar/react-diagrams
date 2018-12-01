@@ -29,6 +29,10 @@ export class DefaultPortLabel extends BaseWidget<DefaultPortLabelProps, DefaultP
 
 	deletePort = (model: DefaultPortModel) => {
 		const {removeCallback} = this.props;
+		Object.keys(model.links).forEach(key => {
+			const link = model.links[key];
+			link.remove();
+		});
 		model.parent.removePort(model);
 		if (removeCallback) {
 			removeCallback();

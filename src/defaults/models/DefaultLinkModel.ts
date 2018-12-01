@@ -58,6 +58,7 @@ export class DefaultLinkModel extends LinkModel<DefaultLinkModelListener> {
 				listener.widthChanged({ ...event, width: width });
 			}
 		});
+
 	}
 
 	setColor(color: string) {
