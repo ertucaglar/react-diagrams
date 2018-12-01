@@ -4,13 +4,16 @@ import { DefaultNodeModel } from "../models/DefaultNodeModel";
 import { DefaultPortLabel } from "./DefaultPortLabelWidget";
 import { DiagramEngine } from "../../DiagramEngine";
 import { BaseWidget, BaseWidgetProps } from "../../widgets/BaseWidget";
+import { DefaultPortModel } from "storm-react-diagrams";
 
 export interface DefaultNodeProps extends BaseWidgetProps {
 	node: DefaultNodeModel;
 	diagramEngine: DiagramEngine;
 }
 
-export interface DefaultNodeState {}
+export interface DefaultNodeState {
+	changed: boolean
+}
 
 /**
  * @author Dylan Vorster
@@ -18,16 +21,25 @@ export interface DefaultNodeState {}
 export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps, DefaultNodeState> {
 	constructor(props: DefaultNodeProps) {
 		super("srd-default-node", props);
-		this.state = {};
+		this.state = {
+			changed: false
+		};
 	}
 
 	generatePort(port) {
 		return <DefaultPortLabel model={port} key={port.id} />;
 	}
 
+	addNewPort = (node: DefaultNodeModel) => {
+		const {changed} = this.state;
+		node.addInPort(`Giriş ${Object.keys(this.props.node.ports).length}`);
+		this.setState({changed: !changed})
+	};
+
 	render() {
+		const {changed} = this.state;
 		return (
-			<div {...this.getProps()} style={{ background: this.props.node.color }}>
+			<div data-changed={changed} {...this.getProps()} style={{ background: this.props.node.color }}>
 				<div className={this.bem("__title")}>
 					<div className={this.bem("__name")}>{this.props.node.name}</div>
 				</div>
@@ -39,6 +51,9 @@ export class DefaultNodeWidget extends BaseWidget<DefaultNodeProps, DefaultNodeS
 						{_.map(this.props.node.getOutPorts(), this.generatePort.bind(this))}
 					</div>
 				</div>
+				{this.props.node.showAddNewButton && <div className="enetity-node-actions">
+					<span onClick={(event) => {this.addNewPort(this.props.node)}} className="add-new-button">Yeni Giriş Ekle</span>
+				</div>}
 			</div>
 		);
 	}

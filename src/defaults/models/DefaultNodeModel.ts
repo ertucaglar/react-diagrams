@@ -12,11 +12,13 @@ export class DefaultNodeModel extends NodeModel {
 	name: string;
 	color: string;
 	ports: { [s: string]: DefaultPortModel };
+	showAddNewButton: boolean;
 
-	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)") {
+	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)", showAddNewButton: boolean = false) {
 		super("default");
 		this.name = name;
 		this.color = color;
+		this.showAddNewButton = showAddNewButton;
 	}
 
 	addInPort(label: string): DefaultPortModel {
@@ -31,12 +33,14 @@ export class DefaultNodeModel extends NodeModel {
 		super.deSerialize(object, engine);
 		this.name = object.name;
 		this.color = object.color;
+		this.showAddNewButton = object.showAddNewButton;
 	}
 
 	serialize() {
 		return _.merge(super.serialize(), {
 			name: this.name,
-			color: this.color
+			color: this.color,
+			showAddNewButton: this.showAddNewButton,
 		});
 	}
 

@@ -2,11 +2,15 @@
   $p: &;
 
   display: flex;
-  margin-top: 1px;
+  margin-top: 3px;
 
   > * {
     align-self: center;
   }
+
+	&:last-child {
+		margin-bottom: 3px;
+	}
 
   &__name {
     padding: 0 5px;
