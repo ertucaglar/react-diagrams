@@ -13,12 +13,14 @@ export class DefaultNodeModel extends NodeModel {
 	color: string;
 	ports: { [s: string]: DefaultPortModel };
 	showAddNewButton: boolean;
+	actionContainer: any;
 
-	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)", showAddNewButton: boolean = false) {
+	constructor(name: string = "Untitled", color: string = "rgb(0,192,255)", showAddNewButton: boolean = false, actionContainer?: any) {
 		super("default");
 		this.name = name;
 		this.color = color;
 		this.showAddNewButton = showAddNewButton;
+		this.actionContainer = actionContainer;
 	}
 
 	addInPort(label: string, extras: any = {}): DefaultPortModel {

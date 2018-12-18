@@ -21,8 +21,24 @@ export default () => {
 	let port1 = node1.addOutPort("Out");
 	node1.setPosition(100, 100);
 
+	const SettingView = (a) => {
+		return(
+			<div>
+			<span onClick={() => {
+				model.clearSelection();
+				engine.zoomToFit();
+				console.log(a);
+			}}>A</span>
+				<span onClick={() => {
+					model.removeNode(a);
+					engine.zoomToFit();
+				}}>B</span>
+			</div>
+		);
+	};
 	//3-B) create another default node
 	var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)", true);
+	node2.actionContainer = SettingView(node2);
 	let port2 = node2.addInPort("In");
 	node2.setPosition(400, 100);
 
